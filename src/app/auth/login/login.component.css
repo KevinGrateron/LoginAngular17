@@ -1,0 +1,14 @@
+.container{
+    height: 60vh;
+    display: flex;
+    justify-content: center;
+}
+form{
+    width: 40vw;
+    height: 53%;
+    border-radius: 12px;
+    padding: 10px;
+}
+.alert{
+    color: red;
+}

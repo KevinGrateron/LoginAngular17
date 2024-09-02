@@ -1,0 +1,49 @@
+<!-- https://imaginaformacion.com/tutoriales/formulario-reactivo-angular   /// mas info sobre formularios reactivos -->
+<!-- https://mugan86.medium.com/formularios-en-angular-diferencias-template-y-reactive-forms-e37af5e30b81  // como se manejan los formularios reactivos y de template -->
+<div class="container mt-4">
+  <form [formGroup]="loginForm">
+    <p class="text-danger">{{loginError}}</p>
+    <div class="mb-3">
+      <label for="exampleInputEmail1" class="form-label">Email</label>
+      <input
+        type="email"
+        formControlName="email"
+        class="form-control"
+        id="exampleInputEmail1"
+        aria-describedby="emailHelp"
+      />
+      <div *ngIf="email.invalid && (email.dirty || email.touched)" class="text-danger">
+        <div *ngIf="email.errors?.['required']">El nombre es requerido.</div>
+        <div *ngIf="email.errors?.['email']">
+          El formato de email no es valido.
+        </div>
+      </div>
+    </div>
+    <div class="mb-3">
+      <label for="exampleInputPassword1" class="form-label">Password</label>
+      <input
+        [ngClass]="{
+          'is-invalid':
+            loginForm.get('password')?.hasError('required') &&
+            loginForm.get('password')?.touched,
+          'is-valid': loginForm.get('password')?.valid
+        }"
+        type="password"
+        formControlName="password"
+        class="form-control"
+        id="exampleInputPassword1"
+      />
+      <span
+        class="alert"
+        *ngIf="
+          loginForm.get('password')?.hasError('required') &&
+          loginForm.get('password')?.touched
+        "
+        >El campo es requerido.</span
+      >
+    </div>
+    <button type="button" class="btn btn-primary" (click)="login()">
+      Iniciar sesion
+    </button>
+  </form>
+</div>
