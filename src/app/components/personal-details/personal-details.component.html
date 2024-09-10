@@ -1,0 +1,98 @@
+<p *ngIf="errorMessage.length!=0">{{errorMessage}}</p>
+<!-- el !userLoginOn se deberia quitar -->
+<div *ngIf="(userLoginOn && !editMode) ||!userLoginOn">
+    <p><b>Nombre: </b>{{user?.firstname}}</p>
+    <p><b>Apellido: </b>{{user?.lastname}}</p>
+    <p><b>Pais: </b>{{user?.country}}</p>
+    <button *ngIf="userLoginOn && !editMode" (click)="editMode = true" class="btn btn-dark">
+        <img src="https://cdn.icon-icons.com/icons2/1572/PNG/96/3592815-compose-create-edit-edit-file-office-pencil-writing_107734.png" width="8%" alt="Editar">
+        Editar datos personales.    
+    </button>
+    <button *ngIf="userLoginOn" type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+        Agregar
+      </button> 
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="exampleModalLabel">Agregar nuevo usuario</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <!-- datos del formulario -->
+         <form [formGroup]="employeeForm" (ngSubmit)="newUser()">
+        <div class="modal-body">
+            <div class="mb-3">
+                <label for="exampleInputEmail1" class="form-label">Username</label>
+                <input type="email" class="form-control" formControlName="username" id="exampleInputEmail1" aria-describedby="emailHelp">
+              </div>
+              <div class="mb-3">
+                <label for="exampleInputPassword1" class="form-label">Password</label>
+                <input type="password" formControlName="password" class="form-control" id="exampleInputPassword1">
+              </div>
+              <div class="mb-3">
+                <label for="exampleInputfirstname" class="form-label">Firstname</label>
+                <input type="text" class="form-control" formControlName="firstname" id="exampleInputfirstname" aria-describedby="emailHelp">
+              </div>
+              <div class="mb-3">
+                <label for="exampleInputlastname" class="form-label">Lastname</label>
+                <input type="text" class="form-control" formControlName="lastname" id="exampleInputlastname" aria-describedby="emailHelp">
+              </div>
+              <div class="mb-3">
+                <label for="exampleInputcountry" class="form-label">Country</label>
+                <input type="text" class="form-control" formControlName="country" id="exampleInputcountry" aria-describedby="emailHelp">
+              </div>
+        </div>
+
+        <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            <button type="submit" class="btn btn-primary" data-bs-dismiss="modal" [disabled]="!employeeForm.valid">Guardar</button>
+          </div>
+    </form>
+
+        
+      </div>
+    </div>
+  </div>
+
+<form *ngIf="userLoginOn && editMode" [formGroup]="registerForm" >
+    <div class="form-group row">
+        <label for="inputFirstName" class="col-sm-1 col-form-label">Nombre</label>
+        <div class="col-sm-11">
+        <input type="text" formControlName="firstname" class="form-control" id="inputFirstName">
+        
+            <div *ngIf="firstname.invalid && (firstname.dirty || firstname.touched)" class="text-danger">
+                <div *ngIf="firstname.errors?.['required']">
+                    El Nombre es requerido.
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <div class="form-group row">
+        <label for="inputLasttName" class="col-sm-1 col-form-label">Apellido</label>
+        <div class="col-sm-11">
+        <input type="text" formControlName="lastname" class="form-control" id="inputLasttName">
+        <div *ngIf="lastname.invalid && (lastname.dirty || lastname.touched)" class="text-danger">
+            <div *ngIf="lastname.errors?.['required']">
+                El Apellido es requerido.
+            </div>
+        </div>
+    </div>
+    </div>
+    <div class="form-group row border-bottom pb-3" >
+        <label for="inputCountry" class="col-sm-1 col-form-label">País</label>
+        <div class="col-sm-11">
+        <input type="text" formControlName="country" class="form-control" id="inputCountry" >
+        <div *ngIf="country.invalid && (country.dirty || country.touched)" class="text-danger">
+            <div *ngIf="country.errors?.['required']">
+                El País es requerido.
+            </div>
+        </div>
+    </div>
+    </div>
+    <button type="submit" (click)="savePersonalDetailsData()"  class="btn btn-dark mt-3">Guardar</button>
+    <a class="btn btn-danger mt-3" (click)="editMode=false">Cancelar</a>
+</form>

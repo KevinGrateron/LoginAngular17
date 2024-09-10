@@ -1,0 +1,20 @@
+<div class="container"  *ngIf="userLoginOn">
+    <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">Username</th>
+            <th scope="col">Firstname</th>
+            <th scope="col">Lastname</th>
+            <th scope="col">Country</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let users of userList">
+            <th>{{users.username}}</th>
+            <td>{{users.firstname}}</td>
+            <td>{{users.lastname}}</td>
+            <td>{{users.country}}</td>
+          </tr>
+        </tbody>
+      </table>
+</div>

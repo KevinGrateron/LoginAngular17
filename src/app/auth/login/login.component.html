@@ -4,16 +4,16 @@
   <form [formGroup]="loginForm">
     <p class="text-danger">{{loginError}}</p>
     <div class="mb-3">
-      <label for="exampleInputEmail1" class="form-label">Email</label>
+      <label for="exampleInputEmail1" class="form-label">Username</label>
       <input
         type="email"
-        formControlName="email"
+        formControlName="username"
         class="form-control"
         id="exampleInputEmail1"
         aria-describedby="emailHelp"
       />
       <div *ngIf="email.invalid && (email.dirty || email.touched)" class="text-danger">
-        <div *ngIf="email.errors?.['required']">El nombre es requerido.</div>
+        <div *ngIf="email.errors?.['required']">El username es requerido.</div>
         <div *ngIf="email.errors?.['email']">
           El formato de email no es valido.
         </div>

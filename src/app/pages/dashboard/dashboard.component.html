@@ -1,9 +1,48 @@
 <app-nav></app-nav>
-<p *ngIf="!userLoginOn">Usuario No autentificado.</p>
-<p *ngIf="userLoginOn">Usuario autentificado</p>
-<div class="container">
+<div class="container-fluid">
+    <div class="container">
+        <p *ngIf="!userLoginOn">Usuario No autentificado.</p>
+        <p *ngIf="userLoginOn">Usuario autentificado</p>
+        <div class="card ">
+            <div class="card-header">
+                Datos Personales
+            </div>
+            <div class="card-body m-0">
+                <app-personal-details></app-personal-details>
+            </div>
+        
+        </div>
+        <div class="card">
+            <div class="card-header">
+                Perfil Profesional
+            </div>
+            <div class="card-body m-0">
+        
+            </div>
+        </div>
+        <div class="card">
+            <div class="card-header">
+                Datos Académicos
+            </div>
+            <div class="card-body m-0">
+        
+            </div>
+        
+        </div>
+        
+        <div class="card">
+            <div class="card-header">
+                Experiencia Laboral
+            </div>
+            <div class="card-body m-0">
+        
+            </div>
+        </div>
+    </div>
+</div>
+<!-- <div class="container">
     <p *ngIf="userLoginOn">{{userData?.name}}</p>
     <p *ngIf="userLoginOn">{{userData?.lastname}}</p>
     <p *ngIf="userLoginOn">{{userData?.email}}</p>
     <p *ngIf="userLoginOn">{{userData?.message}}</p>
-</div>
+</div> -->

@@ -3,26 +3,23 @@ import { NavComponent } from '../../shared/nav/nav.component';
 import { CommonModule } from '@angular/common';
 import { LoginService } from '../../services/auth/login.service';
 import { User } from '../../services/auth/user';
+import { PersonalDetailsComponent } from '../../components/personal-details/personal-details.component';
 
 @Component({
   selector: 'app-dashboard',
   standalone: true,
-  imports: [NavComponent, CommonModule],
+  imports: [NavComponent, CommonModule, PersonalDetailsComponent],
   templateUrl: './dashboard.component.html',
   styleUrl: './dashboard.component.css'
 })
-export class DashboardComponent implements OnInit , OnDestroy{
+export class DashboardComponent implements OnInit{
 
   userLoginOn:boolean = false;
-  userData?:User;
+  // userData?:User;
 
 
   private loginService = inject(LoginService);
   constructor(){}
-   ngOnDestroy(): void {
-      this.loginService.currentUserData.unsubscribe();
-      this.loginService.currentUserLoginOn.unsubscribe();
-  }
 
   ngOnInit(): void {
       this.loginService.currentUserLoginOn.subscribe({
@@ -31,11 +28,11 @@ export class DashboardComponent implements OnInit , OnDestroy{
         }
       });
 
-      this.loginService.currentUserData.subscribe({
-        next: (userData) => {
-          this.userData = userData;
-        }
-      })
+      // this.loginService.currentUserData.subscribe({
+      //   next: (userData) => {
+      //     this.userData = userData;
+      //   }
+      // })
 
 
   }
